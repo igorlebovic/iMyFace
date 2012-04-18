@@ -12,13 +12,10 @@ class MembersController < ApplicationController
   end
 
   def create
-    @member = Member.new(params[:member])
-    if @member.valid?
-      flash[:notice] = "Successfully created member."
-      redirect_to @category
-    else
-      render :action => 'new'
-    end
+    @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password])
+    @members = Member.all.push(@member)
+    flash[:notice] = "Successfully created member."
+    redirect_to members_path
   end
   
 end

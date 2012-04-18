@@ -1,3 +1,8 @@
-<%= "Products for Member #{@member.char}" %>
+<h3>Member: <%= "#{@member.first_name} #{@member.last_name}" %></h3>
 
 <p><%= link_to "Select a Member", members_path %></p>
+
+<p>OuttaMyFace: <%= options_from_collection_for_select(Member.all, :first_name, :last_name) %></p>
+
+<p>InMyFace: <% array = Member.all.map { |m| [m.first_name, m.last_name] } %>
+<%= options_for_select(array) %></p>

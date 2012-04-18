@@ -1,5 +1,7 @@
-<%= "Select a Member" %>
+<h3>Select a Member</h3>
 
 <% for member in @members %>
-  <%= link_to member.char, member_path(member) %>
+  <%= link_to member.username, member_path(member.username) %>
 <% end %>
+
+<p><%= link_to "New", new_member_path %></p>

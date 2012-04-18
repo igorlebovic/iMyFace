@@ -1,10 +1,23 @@
-<%= "New Member" %>
+<h3>New Member</h3>
 
-<%= form_for @member, :url => { :action => "create" } do |f| %>
-  <%= f.error_messages %>
+<%= form_tag("/members", :method => "post") do %>
   <p>
-    <%= f.label :char %><br />
-    <%= f.text_field :char %>
+  <%= label_tag(:first_name, "First Name:") %>
+  <%= text_field_tag(:first_name) %>
   </p>
-  <p><%= f.submit "Submit" %></p>
+  <p>
+  <%= label_tag(:last_name, "Last Name:") %>
+  <%= text_field_tag(:last_name) %>
+  </p>
+  <p>
+  <%= label_tag(:username, "Username:") %>
+  <%= text_field_tag(:username) %>
+  </p>
+  <p>
+  <%= label_tag(:password, "Password:") %>
+  <%= text_field_tag(:password) %>
+  </p>
+  <p>
+  <%= submit_tag("Create Member") %>
+  </p>
 <% end %>
