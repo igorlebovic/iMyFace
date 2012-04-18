@@ -1,0 +1,5 @@
+<%= "Select a Member" %>
+
+<% for member in @members %>
+  <%= link_to member.char, member_path(member) %>
+<% end %>

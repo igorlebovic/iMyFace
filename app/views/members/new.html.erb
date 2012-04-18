@@ -1,0 +1,10 @@
+<%= "New Member" %>
+
+<%= form_for @member, :url => { :action => "create" } do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :char %><br />
+    <%= f.text_field :char %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>
