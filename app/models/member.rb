@@ -1,4 +1,7 @@
 class Member
+
+# require "./app/models/member.rb"
+
   attr_reader :first_name, :last_name, :username, :password
   
   def self.all
