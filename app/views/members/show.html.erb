@@ -2,11 +2,15 @@
 
 <p><%= link_to "Select a Member", members_path %></p>
 
-<p>Outta:
+<p>Outta: 
   <% for username in @member.outta %>
-    <%= link_to Member.find(username).username, member_path(Member.find(username).username) %>
+    <%= link_to username, member_path(username) %>
   <% end %>
 </p>
+
+
+
+
 
 <!-- <p>OuttaMyFace: <%= options_from_collection_for_select(Member.all, :first_name, :last_name) %></p>
 
