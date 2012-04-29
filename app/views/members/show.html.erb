@@ -2,18 +2,16 @@
 
 <p><%= link_to "Select a Member", members_path %></p>
 
-<% if @member.outta %>
-  <p>Outta: 
+<% if @member.outta.any? %>
+  <p style="color:red">INTO:</p>
     <% for username in @member.outta %>
-      <%= link_to username, member_path(username) %>
+      <%= link_to username, member_path(username) %></br>
     <% end %>
-  </p>
 <% end %>
 
-<% if @member.into %>
-  <p>Into: 
+<% if @member.into.any? %>
+  <p style="color:green">INTO:</p>
     <% for username in @member.into %>
-      <%= link_to username, member_path(username) %>
+      <%= link_to username, member_path(username) %></br>
     <% end %>
-  </p>
 <% end %>

@@ -7,13 +7,13 @@
 <% for member in @members %>
   <%= link_to member.username, member_path(member.username) %>
   <% if member.outta.any? %>
-    <span style="color:red">Outta:</span>
+    <span style="color:red">OUTTA:</span>
     <% for outta in member.outta %>
       <%= link_to outta, member_path(outta) %>
     <% end %>
   <% end %>
   <% if member.into.any? %>
-    <span style="color:blue">Into:</span>
+    <span style="color:green">INTO:</span>
     <% for into in member.into %>
       <%= link_to into, member_path(into) %>
     <% end %>
