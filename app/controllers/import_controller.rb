@@ -1,8 +1,5 @@
 class ImportController < ApplicationController
 
-  def home
-  end
-  
   def faces
     contents = File.open('/Users/igorlebovic/csh/face/vendor/data/faces.dat', 'rb') { |f| f.read }
     contents.split(" ").each do |c| 

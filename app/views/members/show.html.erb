@@ -3,10 +3,8 @@
 <p><%= link_to "Select a Member", members_path %></p>
 
 <% if @member.outta.any? %>
-  <p style="color:red">INTO:</p>
-    <% for username in @member.outta %>
-      <%= link_to username, member_path(username) %></br>
-    <% end %>
+  <p style="color:red">OUTTA:</p>
+  <% nested_outta @member %>
 <% end %>
 
 <% if @member.into.any? %>
