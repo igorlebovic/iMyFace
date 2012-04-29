@@ -1,4 +1,5 @@
 class MembersController < ApplicationController
+
   def index
     @members = Member.all
   end
@@ -14,7 +15,11 @@ class MembersController < ApplicationController
   def create
     @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password])
     @members = Member.all.push(@member)
-    flash[:notice] = "Successfully created member."
+    redirect_to members_path
+  end
+
+  def drop
+    Member.delete
     redirect_to members_path
   end
   

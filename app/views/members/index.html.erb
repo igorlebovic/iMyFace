@@ -1,7 +1,21 @@
-<h3>Select a Member</h3>
-
+<h3>Members</h3>
+<p><%= link_to 'Load Faces', 'faces' %></p>
+<p><%= link_to 'Load Connections', 'connections' %></p>
+<p><%= link_to 'Load Posts', 'posts' %></p>
+<p><%= link_to 'Start Over', 'drop' %></p>
+<p>**** Loaded Data ****</p>
 <% for member in @members %>
   <%= link_to member.username, member_path(member.username) %>
+  <% if member.outta.any? %>
+    <span style="color:red">Outta:</span>
+    <% for outta in member.outta %>
+      <%= link_to outta, member_path(outta) %>
+    <% end %>
+  <% end %>
+  <% if member.into.any? %>
+    <span style="color:blue">Into:</span>
+    <% for into in member.into %>
+      <%= link_to into, member_path(into) %>
+    <% end %>
+  <% end %></br>
 <% end %>
-
-<p><%= link_to "New", new_member_path %></p>

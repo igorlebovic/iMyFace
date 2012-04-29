@@ -2,18 +2,18 @@
 
 <p><%= link_to "Select a Member", members_path %></p>
 
-<p>Outta: 
-  <% for username in @member.outta %>
-    <%= link_to username, member_path(username) %>
-  <% end %>
-</p>
+<% if @member.outta %>
+  <p>Outta: 
+    <% for username in @member.outta %>
+      <%= link_to username, member_path(username) %>
+    <% end %>
+  </p>
+<% end %>
 
-
-
-
-
-<!-- <p>OuttaMyFace: <%= options_from_collection_for_select(Member.all, :first_name, :last_name) %></p>
-
-<p>InMyFace: <% array = Member.all.map { |m| [m.first_name, m.last_name] } %>
-<%= options_for_select(array) %></p>
- -->
+<% if @member.into %>
+  <p>Into: 
+    <% for username in @member.into %>
+      <%= link_to username, member_path(username) %>
+    <% end %>
+  </p>
+<% end %>
