@@ -29,10 +29,6 @@ class Member
     @into = options[:into]
   end
   
-  def self.delete
-    self.new(first_name: "", last_name: "", username: "", password: "", outta: "", into: "")
-  end
-  
   def hash_outta
     outters = Hash.new
     if self.outta.any?
@@ -42,6 +38,17 @@ class Member
       end
     end
     return outters
+  end
+
+  def hash_into
+    intos = Hash.new
+    if self.into.any?
+      self.into.each do |username|
+        user = Member.find(username)
+        intos[user] = user.hash_into
+      end
+    end
+    return intos
   end
   
 end

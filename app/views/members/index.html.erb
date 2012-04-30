@@ -2,7 +2,6 @@
 <p><%= link_to 'Load Faces', 'faces' %></p>
 <p><%= link_to 'Load Connections', 'connections' %></p>
 <p><%= link_to 'Load Posts', 'posts' %></p>
-<p><%= link_to 'Start Over', 'drop' %></p>
 <p>**** Loaded Data ****</p>
 <% for member in @members %>
   <%= link_to member.username, member_path(member.username) %>
@@ -13,7 +12,7 @@
     <% end %>
   <% end %>
   <% if member.into.any? %>
-    <span style="color:green">INTO:</span>
+    <span style="color:blue">INTO:</span>
     <% for into in member.into %>
       <%= link_to into, member_path(into) %>
     <% end %>

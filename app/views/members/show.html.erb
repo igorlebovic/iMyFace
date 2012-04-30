@@ -2,16 +2,18 @@
 
 <p><%= link_to "Select a Member", members_path %></p>
 
-<% if @member.outta.any? %>
-  <p style="color:red">OUTTA:</p>
-  <%= nested_outta @member.hash_outta %>
-<% end %>
+<div id="outta">
+  <% if @member.outta.any? %>
+    <p style="color:red">OUTTA:</p>
+    <%= nested_outta @member.hash_outta %>
+  <% end %>
+</div>
 
+<div id="into">
+  <% if @member.into.any? %>
+    <p style="color:blue">INTO:</p>
+    <%= nested_into @member.hash_into %>
+  <% end %>
+</div>
 
-
-<% if @member.into.any? %>
-  <p style="color:green">INTO:</p>
-    <% for username in @member.into %>
-      <%= link_to username, member_path(username) %></br>
-    <% end %>
-<% end %>
+<span class="clear">

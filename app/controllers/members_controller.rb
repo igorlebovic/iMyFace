@@ -17,10 +17,5 @@ class MembersController < ApplicationController
     @members = Member.all.push(@member)
     redirect_to members_path
   end
-
-  def drop
-    Member.delete
-    redirect_to members_path
-  end
   
 end
