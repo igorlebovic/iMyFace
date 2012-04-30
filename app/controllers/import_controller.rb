@@ -1,7 +1,7 @@
 class ImportController < ApplicationController
 
   def faces
-    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/faces2.dat', 'rb') { |f| f.read }
+    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/faces.dat', 'rb') { |f| f.read }
     contents.split(" ").each do |c| 
       data = c.split("|")
       @member = Member.new(first_name: data[0], last_name: data[1], username: data[2], password: data[3], outta: [], into: [])
@@ -11,7 +11,7 @@ class ImportController < ApplicationController
   end
 
   def connections
-    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/connections2.dat', 'rb') { |f| f.read }
+    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/connections.dat', 'rb') { |f| f.read }
     contents.split("\n").each do |c|
       if c.split(" ").include?("InMyFace")
         data = c.split(" InMyFace ")
@@ -27,7 +27,7 @@ class ImportController < ApplicationController
   end
 
   def posts
-    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/posts2.dat', 'rb') { |f| f.read }
+    contents = File.open('/Users/igorlebovic/csh/face/vendor/data/posts.dat', 'rb') { |f| f.read }
     contents.split(" ").each do |c| 
       data = c.split("|")
       @member = Member.new(first_name: data[0], last_name: data[1], username: data[2], password: data[3])
