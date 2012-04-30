@@ -4,10 +4,7 @@
 
 <% if @member.outta.any? %>
   <p style="color:red">OUTTA:</p>
-  <% for username in @member.outta %>
-    <% user = Member.find(username) %>
-    <%= render(:partial => "user", :locals => {:user => user}) + nested_outta(user) %>
-  <% end  %>
+  <%= nested_outta @member %>
 <% end %>
 
 

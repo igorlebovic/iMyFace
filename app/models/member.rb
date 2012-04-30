@@ -3,12 +3,11 @@ class Member
 # require "./app/models/member.rb"
 
   attr_reader :first_name, :last_name, :username, :password, :outta, :into
-  
+  # :user1 => ["Igor", "Lebovic", "igor", "testing", ["john" => ["igor", "jason" => ["john", "jeff" => ["john", "jason"]]], "jason" => ["john" => ["igor", "jason" => ["john", "jeff" => ["john", "jason"]]], "jeff" => ["john" => ["igor", "jason"], "jason"]]], ["jason", "jeff"]],
+  # :user2 => ["John", "Miller", "john", "testing", ["igor", "jason"], ["igor", "jeff"]],
+  # :user3 => ["Jason", "Miller", "jason", "testing", ["john", "jeff"], ["igor", "jeff"]],
+  # :user4 => ["Jeff", "Miller", "jeff", "testing", ["john", "jason"], ["igor", "jason"]]      
   def self.all
-    # :user1 => ["Igor", "Lebovic", "igor", "testing", ["john", "jason"], ["jason", "jeff"]],
-    # :user2 => ["John", "Miller", "john", "testing", ["igor", "jason"], ["igor", "jeff"]],
-    # :user3 => ["Jason", "Miller", "jason", "testing", ["john", "jeff"], ["igor", "jeff"]],
-    # :user4 => ["Jeff", "Miller", "jeff", "testing", ["john", "jason"], ["igor", "jason"]]    
     @members ||= {}.map { |k, v| new(first_name: v[0],
                                      last_name: v[1],
                                      username: v[2],
@@ -32,6 +31,9 @@ class Member
   
   def self.delete
     self.new(first_name: "", last_name: "", username: "", password: "", outta: "", into: "")
+  end
+  
+  def hash_outta
   end
   
 end
