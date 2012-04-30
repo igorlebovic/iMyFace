@@ -34,6 +34,14 @@ class Member
   end
   
   def hash_outta
+    outters = Hash.new
+    if self.outta.any?
+      self.outta.each do |username|
+        user = Member.find(username)
+        outters[user] = user.hash_outta
+      end
+    end
+    return outters
   end
   
 end

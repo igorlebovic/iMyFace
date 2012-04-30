@@ -4,7 +4,7 @@
 
 <% if @member.outta.any? %>
   <p style="color:red">OUTTA:</p>
-  <%= nested_outta @member %>
+  <%= nested_outta @member.hash_outta %>
 <% end %>
 
 
