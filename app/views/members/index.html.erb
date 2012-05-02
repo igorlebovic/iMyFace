@@ -2,7 +2,11 @@
 <p><%= link_to 'Load Faces', 'faces' %></p>
 <p><%= link_to 'Load Connections', 'connections' %></p>
 <p><%= link_to 'Load Posts', 'posts' %></p>
+<p><%= link_to 'New Member', new_member_path %></p>
 <p>**** Loaded Data ****</p>
+
+<%= will_paginate %>
+
 <% for member in @members %>
   <%= link_to member.username, member_path(member.username) %>
   <% if member.outta.any? %>
