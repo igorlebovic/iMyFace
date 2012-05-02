@@ -4,10 +4,9 @@
 <p><%= link_to 'Load Posts', 'posts' %></p>
 <p><%= link_to 'New Member', new_member_path %></p>
 
-<p>**** Loaded Data ****</p>
+<hr><%= will_paginate %><hr>
 
-<%= will_paginate %>
-
+<p>
 <% for member in @members %>
   <%= link_to member.username, member_path(member.username) %>
   <% if member.outta.any? %>
@@ -23,3 +22,7 @@
     <% end %>
   <% end %></br>
 <% end %>
+</p>
+
+<hr><%= will_paginate %><hr>
+<br><br>
