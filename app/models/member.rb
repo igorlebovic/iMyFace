@@ -29,18 +29,12 @@ class Member
     @into = options[:into]
   end
   
-  def hash_outta
+  def hash_outta(i=0)
     outters = Hash.new
-    usernames = Hash.new
     if self.outta.any?
       self.outta.each do |username|
-        if usernames.include?(username)
-          next
-        else
-          usernames[username] = username
-          user = Member.find(username)
-          outters[user] = user.hash_outta
-        end
+        user = Member.find(username)
+        outters[user] = user.hash_outta(i)
       end
     end
     return outters
@@ -48,16 +42,10 @@ class Member
 
   def hash_into
     intos = Hash.new
-    usernames = Hash.new
     if self.into.any?
       self.into.each do |username|
-        if usernames.include?(username)
-          next
-        else
-          usernames[username] = username
-          user = Member.find(username)
-          intos[user] = user.hash_into
-        end
+        user = Member.find(username)
+        intos[user] = user.hash_into
       end
     end
     return intos

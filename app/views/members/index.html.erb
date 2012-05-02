@@ -19,7 +19,7 @@
     <% end %>
   <% end %>
   <% if member.into.any? %>
-    <span style="color:blue">INTO:</span>
+    <span style="color:blue">IN:</span>
     <% for into in member.into %>
       <%= link_to into, member_path(into) %>
     <% end %>

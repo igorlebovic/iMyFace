@@ -11,7 +11,7 @@
       <%= submit_tag("Create") %>
     <% end %>
     <% if @member.outta.any? %>
-      <%= nested_into @member.hash_outta %>
+      <%= nested @member.hash_outta %>
     <% end %>
   </p>
 </div>
@@ -25,7 +25,7 @@
       <%= submit_tag("Create") %>
     <% end %>
     <% if @member.into.any? %>
-      <%= nested_into @member.hash_into %>
+      <%= nested @member.hash_into %>
     <% end %>
   </p>
 </div>

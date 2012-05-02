@@ -1,6 +1,9 @@
 class MembersController < ApplicationController
 
   def index
+    import_faces
+    import_connections
+    # import_posts
     @members = Member.all.paginate(:page => params[:page])
   end
 
