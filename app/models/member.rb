@@ -31,24 +31,36 @@ class Member
   
   def hash_outta
     outters = Hash.new
+    usernames = Hash.new
     if self.outta.any?
       self.outta.each do |username|
-        user = Member.find(username)
-        outters[user] = user.hash_outta
+        if usernames.include?(username)
+          next
+        else
+          usernames[username] = username
+          user = Member.find(username)
+          outters[user] = user.hash_outta
+        end
       end
     end
     return outters
   end
- 
+
   def hash_into
     intos = Hash.new
+    usernames = Hash.new
     if self.into.any?
       self.into.each do |username|
-        user = Member.find(username)
-        intos[user] = user.hash_into
+        if usernames.include?(username)
+          next
+        else
+          usernames[username] = username
+          user = Member.find(username)
+          intos[user] = user.hash_into
+        end
       end
     end
     return intos
-  end
+  end  
   
 end
