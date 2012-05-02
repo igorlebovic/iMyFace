@@ -3,15 +3,25 @@
 <p><%= link_to "Select a Member", members_path %></p>
 
 <div id="outta">
-  <% if @member.outta.any? %>
-    <p style="color:red">OUTTA:</p>
+  <p style="color:red">OUTTA:</p>
+  <%= form_tag("/inmyface", :method => "get") do %>
+    <%= text_field_tag(:face) %>
+    <%= hidden_field_tag(:id, params[:id]) %>
+    <%= submit_tag("Create") %>
+  <% end %>
+  <% if @member.outta.any? %>    
     <%= nested_outta @member.hash_outta %>
   <% end %>
 </div>
 
 <div id="into">
+  <p style="color:blue">INTO:</p>
+  <%= form_tag("/outtamyface", :method => "get") do %>
+    <%= text_field_tag(:face) %>
+    <%= hidden_field_tag(:id, params[:id]) %>
+    <%= submit_tag("Create") %>
+  <% end %>
   <% if @member.into.any? %>
-    <p style="color:blue">INTO:</p>
     <%= nested_into @member.hash_into %>
   <% end %>
 </div>
