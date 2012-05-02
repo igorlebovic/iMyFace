@@ -4,11 +4,14 @@
 <p><%= link_to 'Load Posts', 'posts' %></p>
 <p><%= link_to 'New Member', new_member_path %></p>
 
+<% if @members.any? %>
 <hr><%= will_paginate %><hr>
+<% end %>
 
 <p>
+<ul>
 <% for member in @members %>
-  <%= link_to member.username, member_path(member.username) %>
+  <li><%= link_to member.username, member_path(member.username) %>
   <% if member.outta.any? %>
     <span style="color:red">OUTTA:</span>
     <% for outta in member.outta %>
@@ -20,9 +23,13 @@
     <% for into in member.into %>
       <%= link_to into, member_path(into) %>
     <% end %>
-  <% end %></br>
+  <% end %></li>
 <% end %>
+</ul>
 </p>
 
+<% if @members.any? %>
 <hr><%= will_paginate %><hr>
-<br><br>
+<% end %>
+
+<br><br><br><br>

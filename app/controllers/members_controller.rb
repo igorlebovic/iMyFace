@@ -14,7 +14,7 @@ class MembersController < ApplicationController
 
   def create
     @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password], outta: [], into: [])
-    @members = Member.all.push(@member)
+    @members = Member.all.unshift(@member)
     redirect_to members_path
   end
   
