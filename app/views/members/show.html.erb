@@ -4,26 +4,30 @@
 
 <div id="outta">
   <p style="color:red">OUTTA:</p>
-  <%= form_tag("/inmyface", :method => "get") do %>
-    <%= text_field_tag(:face) %>
-    <%= hidden_field_tag(:id, params[:id]) %>
-    <%= submit_tag("Create") %>
-  <% end %>
-  <% if @member.outta.any? %>    
-    <%= nested_outta @member.hash_outta %>
-  <% end %>
+  <p>
+    <%= form_tag("/outtamyface", :method => "get") do %>
+      <%= text_field_tag(:face) %>
+      <%= hidden_field_tag(:id, params[:id]) %>
+      <%= submit_tag("Create") %>
+    <% end %>
+    <% if @member.outta.any? %>
+      <%= nested_into @member.hash_outta %>
+    <% end %>
+  </p>
 </div>
 
 <div id="into">
-  <p style="color:blue">INTO:</p>
-  <%= form_tag("/outtamyface", :method => "get") do %>
-    <%= text_field_tag(:face) %>
-    <%= hidden_field_tag(:id, params[:id]) %>
-    <%= submit_tag("Create") %>
-  <% end %>
-  <% if @member.into.any? %>
-    <%= nested_into @member.hash_into %>
-  <% end %>
+  <p style="color:blue">IN:</p>
+  <p>
+    <%= form_tag("/inmyface", :method => "get") do %>
+      <%= text_field_tag(:face) %>
+      <%= hidden_field_tag(:id, params[:id]) %>
+      <%= submit_tag("Create") %>
+    <% end %>
+    <% if @member.into.any? %>
+      <%= nested_into @member.hash_into %>
+    <% end %>
+  </p>
 </div>
 
 <span class="clear">

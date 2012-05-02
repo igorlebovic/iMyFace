@@ -18,24 +18,32 @@ class MembersController < ApplicationController
     redirect_to members_path
   end
   
-  def inmyface
-    @member = Member.find(params[:id])
-    unless Member.find(params[:face])
-      @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
-      @members = Member.all.push(@face)
-    end
-    @member.into.unshift(params[:face])
-    redirect_to @member
-  end
-  
   def outtamyface
     @member = Member.find(params[:id])
-    unless Member.find(params[:face])
-      @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
-      @members = Member.all.push(@face)
+    if @member.outta.include?(params[:face])
+    else
+      begin Member.find(params[:face])
+      rescue
+        @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
+        @members = Member.all.push(@face)
+      end
+      @member.outta.unshift(params[:face])
     end
-    @member.outta.unshift(params[:face])
-    redirect_to @member
+    redirect_to member_path(@member.username)
   end
-  
+
+  def inmyface
+    @member = Member.find(params[:id])
+    if @member.into.include?(params[:face])
+    else
+      begin Member.find(params[:face])
+      rescue
+        @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
+        @members = Member.all.push(@face)
+      end
+      @member.into.unshift(params[:face])
+    end
+    redirect_to member_path(@member.username)
+  end
+    
 end
