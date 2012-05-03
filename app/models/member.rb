@@ -1,12 +1,6 @@
 class Member
 
-# require "./app/models/member.rb"
-
   attr_reader :first_name, :last_name, :username, :password, :outta, :into
-  # :user1 => ["Igor", "Lebovic", "igor", "testing", ["john" => ["igor", "jason" => ["john", "jeff" => ["john", "jason"]]], "jason" => ["john" => ["igor", "jason" => ["john", "jeff" => ["john", "jason"]]], "jeff" => ["john" => ["igor", "jason"], "jason"]]], ["jason", "jeff"]],
-  # :user2 => ["John", "Miller", "john", "testing", ["igor", "jason"], ["igor", "jeff"]],
-  # :user3 => ["Jason", "Miller", "jason", "testing", ["john", "jeff"], ["igor", "jeff"]],
-  # :user4 => ["Jeff", "Miller", "jeff", "testing", ["john", "jason"], ["igor", "jason"]]      
   def self.all
     @members ||= {}.map { |k, v| new(first_name: v[0],
                                      last_name: v[1],
@@ -31,17 +25,12 @@ class Member
   
   def hash_outta
     member = self
-    # does the member have any followers?
+    @excluded_outta = Set.new
     if member.outta.any?
-      # create a hash with member's first-order followers
       hash = followers(member)
-      # iterate over each first-order follower
       hash.each_key do |member|
-        # does the first-order follower have any followers?
         if member.outta.any?
-          # create a hash with follower's second-order followers
           sub_hash = followers(member)
-          # insert a hash of second-order followers as a value of the first-order follower's key
           hash[member].replace(sub_hash).each_key do |member2|
             if member2.outta.any?
               sub_hash = followers(member2)
@@ -63,10 +52,27 @@ class Member
                                   hash[member][member2][member3][member4][member5][member6][member7].replace(sub_hash).each_key do |member8|
                                     if member8.outta.any?
                                       sub_hash = followers(member8)
-                                      hash[member][member2][member3][member4][member5][member6][member7][member8]
-                                      # base = { user = { user = {}}}
-                                      # cur = base
-                                      # cur = cur[user]
+                                      hash[member][member2][member3][member4][member5][member6][member7][member8].replace(sub_hash).each_key do |member9|
+                                        if member9.outta.any?
+                                          sub_hash = followers(member9)
+                                          hash[member][member2][member3][member4][member5][member6][member7][member8][member9].replace(sub_hash).each_key do |member10|
+                                            if member10.outta.any?
+                                              sub_hash = followers(member10)
+                                              hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10].replace(sub_hash).each_key do |member11|
+                                                if member11.outta.any?
+                                                  sub_hash = followers(member11)
+                                                  hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10][member11].replace(sub_hash).each_key do |member12|
+                                                    if member12.outta.any?
+                                                      sub_hash = followers(member12)
+                                                      hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10][member11][member12]
+                                                    end
+                                                  end
+                                                end
+                                              end
+                                            end
+                                          end
+                                        end
+                                      end
                                     end
                                   end
                                 end
@@ -87,29 +93,104 @@ class Member
     return hash
   end
 
-
-  def followers(member)
-    # initialize a hash of first-order followers
-    outters = Hash.new
-    # iterate over members' followers
-    member.outta.each do |username|
-      # associate the follower's username with the object
-      user = Member.find(username)
-      # in the hash of first-order followers, object is the key and an empty hash is the value
-      outters[user] = Hash.new
-    end
-    return outters
-  end
+  # raise @excluded.inspect
+  
+  # base = { user = { user = {}}}
+  # cur = base
+  # cur = cur[user]
 
   def hash_into
-    intos = Hash.new
-    if self.into.any?
-      self.into.each do |username|
-        user = Member.find(username)
-        intos[user] = user.hash_into
+    member = self
+    @excluded_into = Set.new
+    if member.into.any?
+      hash = following(member)
+      hash.each_key do |member|
+        if member.into.any?
+          sub_hash = following(member)
+          hash[member].replace(sub_hash).each_key do |member2|
+            if member2.into.any?
+              sub_hash = following(member2)
+              hash[member][member2].replace(sub_hash).each_key do |member3|
+                if member3.into.any?
+                  sub_hash = following(member3)
+                  hash[member][member2][member3].replace(sub_hash).each_key do |member4|
+                    if member4.into.any?
+                      sub_hash = following(member4)
+                      hash[member][member2][member3][member4].replace(sub_hash).each_key do |member5|
+                        if member5.into.any?
+                          sub_hash = following(member5)
+                          hash[member][member2][member3][member4][member5].replace(sub_hash).each_key do |member6|
+                            if member6.into.any?
+                              sub_hash = following(member6)
+                              hash[member][member2][member3][member4][member5][member6].replace(sub_hash).each_key do |member7|
+                                if member7.into.any?
+                                  sub_hash = following(member7)
+                                  hash[member][member2][member3][member4][member5][member6][member7].replace(sub_hash).each_key do |member8|
+                                    if member8.into.any?
+                                      sub_hash = following(member8)
+                                      hash[member][member2][member3][member4][member5][member6][member7][member8].replace(sub_hash).each_key do |member9|
+                                        if member9.outta.any?
+                                          sub_hash = following(member9)
+                                          hash[member][member2][member3][member4][member5][member6][member7][member8][member9].replace(sub_hash).each_key do |member10|
+                                            if member10.outta.any?
+                                              sub_hash = following(member10)
+                                              hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10].replace(sub_hash).each_key do |member11|
+                                                if member11.outta.any?
+                                                  sub_hash = following(member11)
+                                                  hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10][member11].replace(sub_hash).each_key do |member12|
+                                                    if member12.outta.any?
+                                                      sub_hash = following(member12)
+                                                      hash[member][member2][member3][member4][member5][member6][member7][member8][member9][member10][member11][member12]
+                                                    end
+                                                  end
+                                                end
+                                              end
+                                            end
+                                          end
+                                        end
+                                      end
+                                    end
+                                  end
+                                end
+                              end
+                            end
+                          end
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
       end
     end
-    return intos
-  end  
-  
+    return hash
+  end
+
+  def followers(member)
+    hash = Hash.new
+    member.outta.each do |username|
+      unless @excluded_outta.include?(username)
+        @excluded_outta.add(username)      
+        user = Member.find(username)
+        hash[user] = Hash.new
+      end
+    end
+    return hash
+  end
+
+  def following(member)
+    hash = Hash.new
+    member.into.each do |username|
+      unless @excluded_into.include?(username)
+        @excluded_into.add(username)      
+        user = Member.find(username)
+        hash[user] = Hash.new
+      end
+    end
+    return hash
+  end
+
 end
