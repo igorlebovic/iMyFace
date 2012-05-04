@@ -29,8 +29,11 @@ def sub_followers(hash)
     sub_hash = member_followers(member)
     hash[member].replace(sub_hash)
   end
-  hash.each_value do |follower_hash|
-    sub_followers(follower_hash)
+  hash.map do |key, follower_hash|
+    follower_hash.each_key do |follower_member|
+      sub_hash = member_followers(follower_member)
+      hash[key][follower_member].replace(sub_hash)
+    end
   end
 end
 
