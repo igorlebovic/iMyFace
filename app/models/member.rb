@@ -23,34 +23,6 @@ class Member
     @into = options[:into]
   end
   
-  def hash_outta
-    member = self
-    @excluded_outta = Set.new
-    if member.outta.any?
-      hash = followers(member)
-      recursive(hash)
-    end
-    return hash
-  end
-  
-  def recursive(hash)
-    hash.each_key do |member|
-      if member.outta.any?
-        sub_hash = followers(member)
-        # raise hash.inspect
-        # raise member.inspect
-        # raise hash[member].inspect
-        # hash = hash[member]
-        recursive(hash[member].replace(sub_hash))
-      end
-    end
-  end
-  
-  
-  # base = { user = { user = {}}}
-  # cur = base
-  # cur = cur[user]
-
   def hash_into
     member = self
     @excluded_into = Set.new
@@ -116,18 +88,6 @@ class Member
             end
           end
         end
-      end
-    end
-    return hash
-  end
-
-  def followers(member)
-    hash = Hash.new
-    member.outta.each do |username|
-      unless @excluded_outta.include?(username)
-        @excluded_outta.add(username)      
-        user = Member.find(username)
-        hash[user] = Hash.new
       end
     end
     return hash
