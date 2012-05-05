@@ -92,7 +92,6 @@ def sub_followers(hash)
             follower_hash5.each_key do |follower_member|
               sub_hash = member_followers(follower_member)
               hash[key][key2][key3][key4][key5][follower_member].replace(sub_hash)
-              raise hash.inspect
             end
           end
         end
@@ -151,7 +150,6 @@ def sub_following(hash)
             follower_hash5.each_key do |follower_member|
               sub_hash = member_following(follower_member)
               hash[key][key2][key3][key4][key5][follower_member].replace(sub_hash)
-              raise hash.inspect
             end
           end
         end
