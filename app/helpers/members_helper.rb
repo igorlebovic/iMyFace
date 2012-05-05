@@ -163,6 +163,20 @@ def sub_following(hash)
       follower_hash2.each do |key3, follower_hash3|
         follower_hash3.each do |key4, follower_hash4|
           follower_hash4.each do |key5, follower_hash5|
+            follower_hash5.each_key do |follower_member|
+              sub_hash = member_following(follower_member)
+              hash[key][key2][key3][key4][key5][follower_member].replace(sub_hash)
+            end
+          end
+        end
+      end
+    end
+  end
+  hash.each do |key, follower_hash|
+    follower_hash.each do |key2, follower_hash2|
+      follower_hash2.each do |key3, follower_hash3|
+        follower_hash3.each do |key4, follower_hash4|
+          follower_hash4.each do |key5, follower_hash5|
             follower_hash5.each do |key6, follower_hash6|
               follower_hash6.each_key do |follower_member|
                 sub_hash = member_following(follower_member)
