@@ -2,9 +2,7 @@ Face::Application.routes.draw do
   resources :members
 
   root to: 'members#index'
-  match 'faces' => 'import#faces'
-  match 'connections' => 'import#connections'
-  match 'posts' => 'import#posts'
+  match 'import_data' => 'members#import_data'
   match 'inmyface' => 'members#inmyface'
   match 'outtamyface' => 'members#outtamyface'
 end

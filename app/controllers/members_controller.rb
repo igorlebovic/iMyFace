@@ -1,13 +1,14 @@
 class MembersController < ApplicationController
 
   def index
-    import_faces
-    import_connections
     @members = Member.all.paginate(:page => params[:page])
   end
 
   def show
-    @member = Member.find(params[:id])
+    begin @member = Member.find(params[:id])
+    rescue
+      render 'members/error'
+    end
   end
 
   def new
@@ -15,9 +16,15 @@ class MembersController < ApplicationController
   end
 
   def create
-    @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password], outta: params[:outta], into: params[:into])
+    @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password], outta: [params[:outta]], into: [params[:into]])
     @members = Member.all.unshift(@member)
     redirect_to members_path
+  end
+  
+  def import_data
+    import_faces
+    import_connections
+    redirect_to root_path
   end
   
   def outtamyface
