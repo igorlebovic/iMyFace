@@ -3,7 +3,6 @@ class MembersController < ApplicationController
   def index
     import_faces
     import_connections
-    # import_posts
     @members = Member.all.paginate(:page => params[:page])
   end
 
@@ -16,7 +15,7 @@ class MembersController < ApplicationController
   end
 
   def create
-    @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password], outta: [], into: [])
+    @member = Member.new(first_name: params[:first_name], last_name: params[:last_name], username: params[:username], password: params[:password], outta: params[:outta], into: params[:into])
     @members = Member.all.unshift(@member)
     redirect_to members_path
   end

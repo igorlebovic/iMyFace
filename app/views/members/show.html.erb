@@ -2,7 +2,7 @@
 
 <p><%= link_to "Select a Member", members_path %></p>
 
-<div id="outta">
+<div id="outta_face">
   <p style="color:red">OUTTA:</p>
   <p>
     <%= form_tag("/outtamyface", :method => "get") do %>
@@ -16,7 +16,7 @@
   </p>
 </div>
 
-<div id="into">
+<div id="into_face">
   <p style="color:blue">IN:</p>
   <p>
     <%= form_tag("/inmyface", :method => "get") do %>
