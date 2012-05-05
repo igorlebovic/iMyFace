@@ -29,16 +29,22 @@ class MembersController < ApplicationController
   
   def outtamyface
     @member = Member.find(params[:id])
-    if @member.outta.include?(params[:face])
-    else
-      begin Member.find(params[:face])
-      rescue
-        @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
-        @members = Member.all.push(@face)
+    begin
+      @face = Member.find(params[:face])
+      if hash_outta(@member).has_key?(face)
+        @result = "#{@face} is one of #{@member}'s Outta connections"
+        render 'members/facedup'
+      else
+        @result = "#{@face} is not one of #{@member}'s Outta connections"
+        render 'members/facedup'
       end
-      @member.outta.unshift(params[:face])
+    rescue
+      # @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
+      # Member.all.push(@face)
+      # @member.outta.unshift(params[:face])
+      @result = "#{@face} is not a member"
+      render 'members/facedup'
     end
-    redirect_to member_path(@member.username)
   end
 
   def inmyface
