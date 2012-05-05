@@ -25,7 +25,7 @@
       <%= submit_tag("Create") %>
     <% end %>
     <% if @member.into.any? %>
-      <%= nested @member.hash_into %>
+      <%= nested hash_into(@member) %>
     <% end %>
   </p>
 </div>
