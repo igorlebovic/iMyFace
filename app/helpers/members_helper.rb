@@ -1,4 +1,7 @@
 module MembersHelper
+  
+  include Hashing
+  
   def nested(members, i=0)
     i = i + 1
     members.map do |key, value|

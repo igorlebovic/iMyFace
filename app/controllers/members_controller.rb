@@ -1,5 +1,7 @@
 class MembersController < ApplicationController
 
+  include Hashing
+
   def index
     @members = Member.all.paginate(:page => params[:page])
   end
@@ -28,9 +30,9 @@ class MembersController < ApplicationController
   end
   
   def outtamyface
-    @member = Member.find(params[:id])
-    @face = Member.find(params[:face])
-    raise @member.hash_outta.has_key?(@face).inspect
+    @member = params[:id]
+    @face = params[:face]
+    raise hash_outta(@member).include?(@face).inspect
     if 1 == 2
             raise @member.inspect
       @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
