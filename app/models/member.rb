@@ -26,36 +26,36 @@ class Member
   def hash_outta
     member = self
     @excluded_outta = Set.new
-    hash = member_followers(member)
+    hash = member_followers(member.username)
     sub_followers(hash)
   end
 
   def hash_into
     member = self
     @excluded_into = Set.new
-    hash = member_following(member)
+    hash = member_following(member.username)
     sub_following(hash)
   end
 
-  def member_followers(member)
+  def member_followers(user)
     hash = Hash.new
+    member = Member.find(user)
     member.outta.each do |username|
       unless @excluded_outta.include?(username)
         @excluded_outta.add(username)
-        user = Member.find(username)
-        hash[user] = Hash.new
+        hash[username] = Hash.new
       end
     end
     return hash
   end
 
-  def member_following(member)
+  def member_following(user)
     hash = Hash.new
+    member = Member.find(user)
     member.into.each do |username|
       unless @excluded_into.include?(username)
-        @excluded_into.add(username)      
-        user = Member.find(username)
-        hash[user] = Hash.new
+        @excluded_into.add(username)
+        hash[username] = Hash.new
       end
     end
     return hash
