@@ -34,14 +34,14 @@ class MembersController < ApplicationController
     @face = params[:face]
     if Member.find(@face)
       if set_outta(@member).include?(@face)
-        @result = "#{@face} is one of #{@member}'s Outta connections"
+        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
         render :action => "facedup"
       else
-        @result = "#{@face} is not one of #{@member}'s Outta connections"
+        @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
         render :action => "facedup"
       end
     else
-      @result = "#{@face} is not a member"
+      @result = "#{@face} is not a community member"
       render :action => "facedup"
     end
   end
@@ -55,14 +55,14 @@ class MembersController < ApplicationController
     @face = params[:face]
     if Member.find(@face)
       if set_into(@member).include?(@face)
-        @result = "#{@face} is one of #{@member}'s Into connections"
+        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
         render :action => "facedup"
       else
-        @result = "#{@face} is not one of #{@member}'s Into connections"
+        @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
         render :action => "facedup"
       end
     else
-      @result = "#{@face} is not a member"
+      @result = "#{@face} is not a community member"
       render :action => "facedup"
     end
   end
