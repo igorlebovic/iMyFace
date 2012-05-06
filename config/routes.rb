@@ -5,4 +5,5 @@ Face::Application.routes.draw do
   match 'import_data' => 'members#import_data'
   match 'inmyface' => 'members#inmyface'
   match 'outtamyface' => 'members#outtamyface'
+  match 'facedup' => 'members#facedup'
 end

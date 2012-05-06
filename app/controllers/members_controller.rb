@@ -29,22 +29,37 @@ class MembersController < ApplicationController
   
   def outtamyface
     @member = Member.find(params[:id])
-    begin
-      @face = Member.find(params[:face])
-      if hash_outta(@member).has_key?(face)
-        @result = "#{@face} is one of #{@member}'s Outta connections"
-        render 'members/facedup'
+    @face = Member.find(params[:face])
+    # raise @face.inspect
+    raise @member.hash_outta.inspect
+    if 1 == 2
+            raise @member.inspect
+      @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
+      redirect_to 'facedup' and return
+    else
+      @result = "no match"
+      redirect_to 'facedup' and return
+    end
+    if @face
+      raise @face.inspect
+      if hash_outta(@member).has_key?(@face)
+        @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
+        redirect_to 'facedup' and return
       else
-        @result = "#{@face} is not one of #{@member}'s Outta connections"
-        render 'members/facedup'
+        @result = "#{@face.username} is not one of #{@member.username}'s Outta connections"
+        redirect_to 'facedup' and return
       end
-    rescue
+    else
       # @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
       # Member.all.push(@face)
       # @member.outta.unshift(params[:face])
-      @result = "#{@face} is not a member"
-      render 'members/facedup'
+      @result = "#{@face.username} is not a member"
+      redirect_to 'facedup' and return
     end
+  end
+  
+  def facedup
+    @result = "test"
   end
 
   def inmyface
