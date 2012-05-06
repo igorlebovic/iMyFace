@@ -33,8 +33,8 @@ class MembersController < ApplicationController
     @member = params[:id]
     @face = params[:face]
     if Member.find(@face)
-      if set_outta(@member).include?(@face)
-        @result = "#{@face} is a community member one of #{@member}'s Outta connections"
+      if set_outta(@member).has_key?(@face)
+        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
         render :action => "facedup"
       else
         @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
@@ -54,8 +54,8 @@ class MembersController < ApplicationController
     @member = params[:id]
     @face = params[:face]
     if Member.find(@face)
-      if set_into(@member).include?(@face)
-        @result = "#{@face} is a community member one of #{@member}'s Outta connections"
+      if set_into(@member).has_key?(@face)
+        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
         render :action => "facedup"
       else
         @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
