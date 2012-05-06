@@ -30,8 +30,7 @@ class MembersController < ApplicationController
   def outtamyface
     @member = Member.find(params[:id])
     @face = Member.find(params[:face])
-    # raise @face.inspect
-    raise @member.hash_outta.inspect
+    raise @member.hash_outta.has_key?(@face).inspect
     if 1 == 2
             raise @member.inspect
       @result = "#{@face.username} is one of #{@member.username}'s Outta connections"

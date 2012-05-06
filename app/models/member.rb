@@ -132,7 +132,6 @@ class Member
         end
       end
     end
-
   end
 
   def sub_following(hash)
@@ -207,6 +206,5 @@ class Member
       end
     end
   end
-
 
 end
