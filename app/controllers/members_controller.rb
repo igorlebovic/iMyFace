@@ -32,7 +32,7 @@ class MembersController < ApplicationController
   def outtamyface
     @member = params[:id]
     @face = params[:face]
-    raise hash_outta(@member).include?(@face).inspect
+    raise hash_outta(@member).has_value?(@face).inspect
     if 1 == 2
             raise @member.inspect
       @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
