@@ -1,5 +1,21 @@
 module Hashing
-  
+
+  def set_outta(username)
+    @excluded_outta = Set.new
+    @excluded_outta.add(username)
+    hash = member_followers(username)
+    sub_followers(hash)
+    return @excluded_outta
+  end
+
+  def set_into(username)
+    @excluded_into = Set.new
+    @excluded_into.add(username)
+    hash = member_following(username)
+    sub_following(hash)
+    return @excluded_into
+  end
+
   def hash_outta(username)
     @excluded_outta = Set.new
     @excluded_outta.add(username)

@@ -11,7 +11,7 @@ class Member
   end
 
   def self.find(param)
-    all.detect { |l| l.username.to_param == param } || raise(ActiveRecord::RecordNotFound)
+    all.detect { |l| l.username.to_param == param } || nil
   end
 
   def initialize(options = {})

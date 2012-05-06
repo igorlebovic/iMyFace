@@ -7,8 +7,8 @@ class MembersController < ApplicationController
   end
 
   def show
-    begin @member = Member.find(params[:id])
-    rescue
+    if @member = Member.find(params[:id])
+    else
       render 'members/error'
     end
   end
@@ -32,30 +32,17 @@ class MembersController < ApplicationController
   def outtamyface
     @member = params[:id]
     @face = params[:face]
-    raise hash_outta(@member).has_value?(@face).inspect
-    if 1 == 2
-            raise @member.inspect
-      @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
-      redirect_to 'facedup' and return
-    else
-      @result = "no match"
-      redirect_to 'facedup' and return
-    end
-    if @face
-      raise @face.inspect
-      if hash_outta(@member).has_key?(@face)
-        @result = "#{@face.username} is one of #{@member.username}'s Outta connections"
-        redirect_to 'facedup' and return
+    if Member.find(@face)
+      if set_outta(@member).include?(@face)
+        @result = "#{@face} is one of #{@member}'s Outta connections"
+        render :action => "facedup"
       else
-        @result = "#{@face.username} is not one of #{@member.username}'s Outta connections"
-        redirect_to 'facedup' and return
+        @result = "#{@face} is not one of #{@member}'s Outta connections"
+        render :action => "facedup"
       end
     else
-      # @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
-      # Member.all.push(@face)
-      # @member.outta.unshift(params[:face])
-      @result = "#{@face.username} is not a member"
-      redirect_to 'facedup' and return
+      @result = "#{@face} is not a member"
+      render :action => "facedup"
     end
   end
   
@@ -64,17 +51,20 @@ class MembersController < ApplicationController
   end
 
   def inmyface
-    @member = Member.find(params[:id])
-    if @member.into.include?(params[:face])
-    else
-      begin Member.find(params[:face])
-      rescue
-        @face = Member.new(first_name: params[:face], last_name: params[:face], username: params[:face], password: params[:face], outta: [], into: [])
-        @members = Member.all.push(@face)
+    @member = params[:id]
+    @face = params[:face]
+    if Member.find(@face)
+      if set_into(@member).include?(@face)
+        @result = "#{@face} is one of #{@member}'s Into connections"
+        render :action => "facedup"
+      else
+        @result = "#{@face} is not one of #{@member}'s Into connections"
+        render :action => "facedup"
       end
-      @member.into.unshift(params[:face])
+    else
+      @result = "#{@face} is not a member"
+      render :action => "facedup"
     end
-    redirect_to member_path(@member.username)
   end
     
 end
