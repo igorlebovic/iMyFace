@@ -1,8 +1,20 @@
 module Hashing
 
+  def sequence_outta(username, face)
+    hash = set_outta(username)
+    face = nested_sequence(hash, face)
+    face = nested_sequence(hash, face)
+    face = nested_sequence(hash, face)
+    raise face.inspect
+  end
+
+  def nested_sequence(hash, face)
+    hash[face]
+  end
+  
   def set_outta(username)
     @excluded_outta = Hash.new
-    @excluded_outta[username] = Hash.new
+    @excluded_outta[username] = ""
     hash = member_followers(username)
     sub_followers(hash)
     return @excluded_outta
@@ -10,7 +22,7 @@ module Hashing
 
   def set_into(username)
     @excluded_into = Hash.new
-    @excluded_outta[username] = Hash.new
+    @excluded_outta[username] = ""
     hash = member_following(username)
     sub_following(hash)
     return @excluded_into
@@ -18,14 +30,14 @@ module Hashing
 
   def hash_outta(username)
     @excluded_outta = Hash.new
-    @excluded_outta[username] = Hash.new
+    @excluded_outta[username] = ""
     hash = member_followers(username)
     sub_followers(hash)
   end
 
   def hash_into(username)
     @excluded_into = Hash.new
-    @excluded_outta[username] = Hash.new
+    @excluded_outta[username] = ""
     hash = member_following(username)
     sub_following(hash)
   end
@@ -35,7 +47,7 @@ module Hashing
     member = Member.find(user)
     member.outta.each do |username|
       unless @excluded_outta.include?(username)
-        @excluded_outta[username] = Hash.new
+        @excluded_outta[username] = user
         hash[username] = Hash.new
       end
     end
@@ -47,7 +59,7 @@ module Hashing
     member = Member.find(user)
     member.into.each do |username|
       unless @excluded_into.include?(username)
-        @excluded_into[username] = Hash.new
+        @excluded_into[username] = user
         hash[username] = Hash.new
       end
     end
