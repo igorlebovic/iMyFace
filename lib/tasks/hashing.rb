@@ -19,6 +19,16 @@ module Hashing
     return @sequence
   end
 
+  def sequence_into(username, face)
+    @sequence = Array.new
+    hash = set_into(username)
+    while !face.empty? do
+      @sequence.unshift(face)
+      face = hash[face]
+    end
+    return @sequence
+  end
+
   def set_outta(username)
     @excluded_outta = Hash.new
     @excluded_outta[username] = ""

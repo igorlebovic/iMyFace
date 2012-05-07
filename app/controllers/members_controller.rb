@@ -72,7 +72,7 @@ class MembersController < ApplicationController
     if Member.find(@face)
       if set_into(@member).has_key?(@face)
         @result = 4
-        @sequence = sequence_outta(@member, @face)
+        @sequence = sequence_into(@member, @face)
         render :action => "facedup"
       else
         @result = 5
