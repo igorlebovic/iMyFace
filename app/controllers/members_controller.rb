@@ -39,6 +39,12 @@ class MembersController < ApplicationController
     import_connections_large
     redirect_to root_path
   end
+
+  def import_data_large_cycles
+    import_faces_large_cycles
+    import_connections_large_cycles
+    redirect_to root_path
+  end
   
   def outtamyface
     @member = params[:id]
