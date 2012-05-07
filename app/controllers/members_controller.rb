@@ -33,6 +33,8 @@ class MembersController < ApplicationController
     @member = params[:id]
     @face = params[:face]
     if Member.find(@face)
+      @overlap = overlap_outta(@member, @face)
+      @overlap_paginated = @overlap.paginate(:page => params[:page])
       if set_outta(@member).has_key?(@face)
         @result = 1
         @sequence = sequence_outta(@member, @face)

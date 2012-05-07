@@ -1,5 +1,14 @@
 module Hashing
 
+  def overlap_outta(username, face)
+    username_array = set_outta(username).keys
+    face_array = set_outta(face).keys
+    overlap = username_array & face_array
+    overlap.delete(username)
+    overlap.delete(face)
+    return overlap
+  end
+
   def sequence_outta(username, face)
     @sequence = Array.new
     hash = set_outta(username)

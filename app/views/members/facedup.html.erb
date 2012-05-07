@@ -13,12 +13,28 @@
 </div></p>
 
 <% if @sequence %>
-  <p><div class="nested">DEGREES OF SEPARATION: <%= @sequence.length - 1 %></div></p>
+  <br><p><div class="nested">DEGREES OF SEPARATION: <%= @sequence.length - 1 %></div></p>
   <p>
     <% @sequence.each do |element| %>
       <div class="nested">
         <%= link_to "#{element}", member_path(element) %>
       </div><div class="nested">
     <% end %>
-  </div></p>
+    <% @sequence.each do |element| %>
+      </div>
+    <% end %>
+  </p>
+<% end %>
+
+<% if @overlap %>
+  <br><p><div class="nested">SHARED OUTTA MEMBERS: <%= @overlap.length %></div></p>
+  <hr><%= will_paginate @overlap_paginated %><hr>
+  <p>
+    <% @overlap.each do |element| %>
+      <div class="nested">
+        <%= link_to "#{element}", member_path(element) %>
+      </div>
+    <% end %>
+  </p>
+  <hr><%= will_paginate @overlap_paginated %><hr>
 <% end %>
