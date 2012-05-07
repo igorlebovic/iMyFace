@@ -33,40 +33,39 @@ class MembersController < ApplicationController
     @member = params[:id]
     @face = params[:face]
     if Member.find(@face)
-      # raise set_outta(@member).inspect
       if set_outta(@member).has_key?(@face)
-        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
+        @result = 1
         @sequence = sequence_outta(@member, @face)
         render :action => "facedup"
       else
-        @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
+        @result = 2
         render :action => "facedup"
       end
     else
-      @result = "#{@face} is not a community member"
+      @result = 3
       render :action => "facedup"
     end
   end
   
-  def facedup
-    @result = "test"
-  end
-
   def inmyface
     @member = params[:id]
     @face = params[:face]
     if Member.find(@face)
       if set_into(@member).has_key?(@face)
-        @result = "#{@face} is a community member and one of #{@member}'s Outta connections"
+        @result = 4
+        @sequence = sequence_outta(@member, @face)
         render :action => "facedup"
       else
-        @result = "#{@face} is a community member but not one of #{@member}'s Outta connections"
+        @result = 5
         render :action => "facedup"
       end
     else
-      @result = "#{@face} is not a community member"
+      @result = 3
       render :action => "facedup"
     end
   end
     
+  def facedup
+  end
+
 end

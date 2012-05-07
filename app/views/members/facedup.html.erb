@@ -1,0 +1,24 @@
+<p><div class="nested">
+<% if @result == 1 %>
+  YES -- <%= link_to(@face, member_path(@face)) +" is a community member and one of "+ link_to("#{@member}'s", member_path(@member)) +" \"Outta\" connections" %>
+<% elsif @result == 2 %>
+  NO -- <%= link_to(@face, member_path(@face)) +" is a community member but not one of "+ link_to("#{@member}'s", member_path(@member)) +" \"Outta\" connections" %>
+<% elsif @result == 4 %>
+  YES -- <%= link_to(@face, member_path(@face)) +" is a community member and one of "+ link_to("#{@member}'s", member_path(@member)) +" \"In\" connections" %>
+<% elsif @result == 5 %>
+  NO -- <%= link_to(@face, member_path(@face)) +" is a community member but not one of "+ link_to("#{@member}'s", member_path(@member)) +" \"In\" connections" %>
+<% else %>
+  <%= @face %> is not a community member
+<% end %>
+</div></p>
+
+<% if @sequence %>
+  <p><div class="nested">DEGREES OF SEPARATION: <%= @sequence.length - 1 %></div></p>
+  <p>
+    <% @sequence.each do |element| %>
+      <div class="nested">
+        <%= link_to "#{element}", member_path(element) %>
+      </div><div class="nested">
+    <% end %>
+  </div></p>
+<% end %>

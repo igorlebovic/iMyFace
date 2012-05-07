@@ -8,4 +8,5 @@ module MembersHelper
       render(:partial => "user", :locals => {:user => key, :i => i}) + content_tag(:div, nested(value, i), :class => "nested")
     end.join.html_safe
   end
+  
 end

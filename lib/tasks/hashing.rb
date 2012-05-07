@@ -1,17 +1,15 @@
 module Hashing
 
   def sequence_outta(username, face)
+    @sequence = Array.new
     hash = set_outta(username)
-    face = nested_sequence(hash, face)
-    face = nested_sequence(hash, face)
-    face = nested_sequence(hash, face)
-    raise face.inspect
+    while !face.empty? do
+      @sequence.unshift(face)
+      face = hash[face]
+    end
+    return @sequence
   end
 
-  def nested_sequence(hash, face)
-    hash[face]
-  end
-  
   def set_outta(username)
     @excluded_outta = Hash.new
     @excluded_outta[username] = ""
@@ -22,7 +20,7 @@ module Hashing
 
   def set_into(username)
     @excluded_into = Hash.new
-    @excluded_outta[username] = ""
+    @excluded_into[username] = ""
     hash = member_following(username)
     sub_following(hash)
     return @excluded_into
@@ -37,7 +35,7 @@ module Hashing
 
   def hash_into(username)
     @excluded_into = Hash.new
-    @excluded_outta[username] = ""
+    @excluded_into[username] = ""
     hash = member_following(username)
     sub_following(hash)
   end
