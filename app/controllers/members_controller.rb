@@ -23,9 +23,20 @@ class MembersController < ApplicationController
     redirect_to members_path
   end
   
-  def import_data
-    import_faces
-    import_connections
+  def remove
+    Member.remove
+    redirect_to members_path
+  end
+  
+  def import_data_small
+    import_faces_small
+    import_connections_small
+    redirect_to root_path
+  end
+
+  def import_data_large
+    import_faces_large
+    import_connections_large
     redirect_to root_path
   end
   

@@ -13,6 +13,10 @@ class Member
   def self.find(param)
     all.detect { |l| l.username.to_param == param } || nil
   end
+  
+  def self.remove
+    remove_instance_variable(:@members)
+  end
 
   def initialize(options = {})
     @first_name = options[:first_name]

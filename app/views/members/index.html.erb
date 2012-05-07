@@ -1,6 +1,8 @@
 <h3>Members</h3>
-<p><%= link_to 'Load Data', 'import_data' %></p>
+<p><%= link_to 'Load Small Data Set', 'import_data_small' %></p>
+<p><%= link_to 'Load Large Data Set', 'import_data_large' %></p>
 <p><%= link_to 'New Member', new_member_path %></p>
+<p><%= link_to 'Delete All Data', 'remove' %></p>
 
 <% if @members.any? %>
 <hr><%= will_paginate %><hr>
